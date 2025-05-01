@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MenuTest {
 
+    /**
+     * test addItem method
+     */
     @Test
     public void testAddItem() {
         Menu menu = new Menu();
@@ -14,9 +17,12 @@ class MenuTest {
         menu.addItem(burger);
 
         boolean containsBurger = menu.getItems().contains(burger);
-        Assertions.assertEquals(true, containsBurger, "Added burger");
+        assertTrue(containsBurger, "Added burger"); // instead of assertEquals(true,..,..)
     }
 
+    /**
+     * test removeItem method
+     */
     @Test
     public void testRemoveItem() {
         Menu menu = new Menu();
@@ -29,10 +35,14 @@ class MenuTest {
 
         boolean containsFries = menu.getItems().stream()
                 .anyMatch(item -> item.getName().equalsIgnoreCase("Fries"));
+        // anyMatch returns true if at least one element matches the condition, false if none
 
-        Assertions.assertEquals(false, containsFries, "Removed fries");
+        assertFalse(containsFries, "Removed fries"); // instead of assertEquals(false,..,..)
     }
 
+    /**
+     * test findItemByName method
+     */
     @Test
     public void testFindItemByName() {
         Menu menu = new Menu();
@@ -41,7 +51,7 @@ class MenuTest {
 
         FoodItem found = menu.findItemByName("burger");
 
-        Assertions.assertEquals(burger.getPrice(), found.getPrice(), 0.01);
         Assertions.assertEquals(burger.getName(), found.getName());
+        Assertions.assertEquals(burger.getPrice(), found.getPrice(), 0.01); // delta as price is double
     }
 }

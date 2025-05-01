@@ -6,15 +6,17 @@ public class Order {
     private Map<FoodItem, Integer> orderedItemCounts;
 
     public Order() {
-        orderedItemCounts = new LinkedHashMap<>();
+        orderedItemCounts = new LinkedHashMap<>(); // following order of insertion
     }
 
     /**
      * Adding an item to the order or increase its quantity
-     * @param item
+     * @param item the item to be added in the order
      */
     public void addItem(FoodItem item) {
         orderedItemCounts.put(item, orderedItemCounts.getOrDefault(item, 0) + 1);
+        // if item is already in map, it gets the current count, if not it returns 0 by default
+        // + 1 adding one more of the item
     }
 
     /**
@@ -29,5 +31,9 @@ public class Order {
 
     public Map<FoodItem, Integer> getOrderedItems() {
         return orderedItemCounts;
+    }
+
+    public void setOrderedItemCounts(Map<FoodItem, Integer> orderedItemCounts) {
+        this.orderedItemCounts = orderedItemCounts;
     }
 }

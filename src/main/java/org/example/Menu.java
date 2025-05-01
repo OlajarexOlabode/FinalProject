@@ -23,7 +23,7 @@ public class Menu {
 
     /**
      * Removing food item from menu
-     * @param itemName
+     * @param itemName the input item name to remove
      */
     public void removeItem(String itemName) {
         items = items.stream()
@@ -44,9 +44,11 @@ public class Menu {
     }
 
     public void sortByName() {
+
     }
 
     public void sortByPrice() {
+
     }
 
     public List<FoodItem> getItems() {

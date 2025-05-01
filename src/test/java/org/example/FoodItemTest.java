@@ -10,7 +10,7 @@ class FoodItemTest {
         FoodItem item = new FoodItem("Burger", 4.00);
 
         Assertions.assertEquals("Burger", item.getName());
-        Assertions.assertEquals(4.00, item.getPrice(), 0.01);
+        Assertions.assertEquals(4.00, item.getPrice(), 0.01); // delta is needed as value is "double"
     }
 
     @Test
