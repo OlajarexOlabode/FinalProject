@@ -7,5 +7,9 @@ public abstract class User {
         this.username = username;
     }
 
+    /**
+     * abstract method to view menu
+     * @param menu the menu to be viewed
+     */
     public abstract void viewMenu(Menu menu);
 }

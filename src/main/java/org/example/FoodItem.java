@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Objects;
 
-public class FoodItem {
+public class FoodItem implements Comparable<FoodItem> {
     private String name;
     private double price;
 
@@ -45,5 +45,10 @@ public class FoodItem {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public int compareTo(FoodItem o) {
+        return this.name.compareTo(o.name);
     }
 }

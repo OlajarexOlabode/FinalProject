@@ -39,7 +39,7 @@ class MenuTest {
         FoodItem burger = new FoodItem("Burger", 4.00);
         menu.addItem(burger);
 
-        FoodItem found = menu.foodItemByName("burger");
+        FoodItem found = menu.findItemByName("burger");
 
         Assertions.assertEquals(burger.getPrice(), found.getPrice(), 0.01);
         Assertions.assertEquals(burger.getName(), found.getName());

@@ -13,17 +13,30 @@ public class Menu {
         items = new ArrayList<>();
     }
 
+    /**
+     * Adding food item to menu
+     * @param item the input item
+     */
     public void addItem(FoodItem item) {
         items.add(item);
     }
 
+    /**
+     * Removing food item from menu
+     * @param itemName
+     */
     public void removeItem(String itemName) {
         items = items.stream()
                 .filter(item -> !item.getName().equalsIgnoreCase(itemName))
                 .toList();
     }
 
-    public FoodItem foodItemByName(String name) {
+    /**
+     * Finding a food item by its name
+     * @param name the name to look for
+     * @return the food item if it is found or null if not
+     */
+    public FoodItem findItemByName(String name) {
         return items.stream()
                 .filter(item -> item.getName().equalsIgnoreCase(name))
                 .findFirst()
