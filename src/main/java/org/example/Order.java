@@ -1,30 +1,25 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Order {
-    private List<FoodItem> orderedItems;
+    private Map<FoodItem, Integer> orderedItemCounts;
 
     public Order() {
-        orderedItems = new ArrayList<>();
+        orderedItemCounts = new LinkedHashMap<>();
     }
 
     public void addItem(FoodItem item) {
-
+        orderedItemCounts.put(item, orderedItemCounts.getOrDefault(item, 0) + 1);
     }
 
     public double calculateTotal() {
-
-        return 0;
+        return orderedItemCounts.entrySet().stream()
+                .mapToDouble(entry -> entry.getKey().getPrice() * entry.getValue())
+                .sum();
     }
 
-    public List<FoodItem> getOrderedItems() {
-
-        return orderedItems;
-    }
-
-    public void setOrderedItems(List<FoodItem> orderedItems) {
-        this.orderedItems = orderedItems;
+    public Map<FoodItem, Integer> getOrderedItems() {
+        return orderedItemCounts;
     }
 }

@@ -5,24 +5,24 @@ import java.util.Objects;
 public class FoodItem {
     private String name;
     private double price;
-    private String description;
+    private String category;
 
-    public FoodItem(String name, double price, String description) {
+    public FoodItem(String name, double price, String category) {
         this.name = name;
         this.price = price;
-        this.description = description;
+        this.category = category;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         FoodItem foodItem = (FoodItem) o;
-        return Double.compare(price, foodItem.price) == 0 && Objects.equals(name, foodItem.name) && Objects.equals(description, foodItem.description);
+        return Double.compare(price, foodItem.price) == 0 && Objects.equals(name, foodItem.name) && Objects.equals(category, foodItem.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price, description);
+        return Objects.hash(name, price, category);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class FoodItem {
         return "FoodItem{" +
                 "name='" + name + '\'' +
                 ", price=" + price +
-                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
 
@@ -50,11 +50,11 @@ public class FoodItem {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCategory() {
+        return category;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
