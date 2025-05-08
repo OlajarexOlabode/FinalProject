@@ -4,9 +4,12 @@ import java.util.*;
 
 public class Order {
     private Map<FoodItem, Integer> orderedItemCounts;
+    private static int nextOrderId = 1;
+    private int orderId = 0;
 
     public Order() {
         orderedItemCounts = new LinkedHashMap<>(); // following order of insertion
+        this.orderId = nextOrderId++;
     }
 
     /**
@@ -29,11 +32,25 @@ public class Order {
                 .sum();
     }
 
+    public void assignOrderId() {
+        if (orderId == 0 && !orderedItemCounts.isEmpty()) {
+            this.orderId = nextOrderId++;
+        }
+    }
+
     public Map<FoodItem, Integer> getOrderedItems() {
         return orderedItemCounts;
     }
 
     public void setOrderedItemCounts(Map<FoodItem, Integer> orderedItemCounts) {
         this.orderedItemCounts = orderedItemCounts;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 }

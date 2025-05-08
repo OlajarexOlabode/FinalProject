@@ -16,10 +16,10 @@ public class Customer extends User implements Orderable {
      */
     @Override
     public void viewMenu(Menu menu) {
-        System.out.println("Customer - Menu:");
+        System.out.println("\nCustomer - Menu:");
         menu.getItems()
                 .forEach(item ->
-                        System.out.printf("- %s: $%.2f ", item.getName(), item.getPrice()));
+                        System.out.println(String.format("- %s: $%.2f ", item.getName(), item.getPrice())));
     }
 
     /**
@@ -28,13 +28,16 @@ public class Customer extends User implements Orderable {
      */
     @Override
     public void placeOrder(Menu menu) {
+        if (menu.getItems().isEmpty()) {
+            System.out.println("\nThe menu is empty. Try again later.");
+            return;
+        }
+
         Scanner scanner = new Scanner(System.in);
         boolean ordering = true;
 
+        System.out.println();
         while (ordering) {
-            System.out.println(" Menu:");
-            viewMenu(menu);
-
             System.out.print("What do you wish to order? Enter 'done' to finish: ");
             String input = scanner.nextLine();
 
@@ -44,7 +47,7 @@ public class Customer extends User implements Orderable {
                 FoodItem choice = menu.findItemByName(input);
                 if (choice != null) {
                     order.addItem(choice);
-                    System.out.println(choice.getName() + "is added to your order.");
+                    System.out.println(choice.getName() + " is added to your order.");
                 } else {
                     System.out.println("Item not found. Please try again.");
                 }
@@ -52,11 +55,14 @@ public class Customer extends User implements Orderable {
         }
 
         double total = order.calculateTotal();
-        System.out.printf(" Your order is complete. Total: $%.2f ", total);
+        System.out.println("\nOrder complete!");
+        System.out.println("Your order number is: #" + order.getOrderId());
+        System.out.printf("Total: $%.2f ", total);
+        System.out.println("\nThanks for ordering! Come again soon.");
 
+        order.assignOrderId();
         Receipt.printReceipt(order);
     }
-
 
     public Order getOrder() {
         return order;

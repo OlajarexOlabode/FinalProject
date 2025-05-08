@@ -9,7 +9,13 @@ public class Receipt {
      * @param order the order to be printed out in the receipt
      */
     public static void printReceipt(Order order) {
-        System.out.println("\n--- RECEIPT ---");
+        if (order.getOrderedItems().isEmpty()) {
+            System.out.println("\nNo items in the order. Receipt not generated. ");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("--- RECEIPT ---");
 
         for (Map.Entry<FoodItem, Integer> entry : order.getOrderedItems().entrySet()) { // Map.Entry helps to get one (K, V) pair
             FoodItem item = entry.getKey();

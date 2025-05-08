@@ -26,9 +26,14 @@ public class Driver extends User { // inherits username from the User class
      * allows driver to view the orders to be delivered
      */
     public void viewDeliveryOrders() {
+        if (deliveryOrders.isEmpty()) {
+            System.out.println("\nNo orders to be delivered by " + username + ".");
+            return;
+        }
+
         System.out.println("\nOrders to be delivered by: " + username);
         for (int i = 0; i < deliveryOrders.size(); i++) {
-            System.out.println("Order " + (i + 1));
+            System.out.println("Order #" + (i + 1));
             Receipt.printReceipt(deliveryOrders.get(i));
         }
     }

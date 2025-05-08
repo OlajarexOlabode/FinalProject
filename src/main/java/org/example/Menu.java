@@ -15,7 +15,12 @@ public class Menu {
      * @param item the input item
      */
     public void addItem(FoodItem item) {
-        items.add(item);
+        if (items.stream().anyMatch(existing -> existing.getName().equalsIgnoreCase(item.getName()))) {
+            System.out.println(item.getName() +" is already in stock.");
+        } else {
+            items.add(item);
+            System.out.println(item.getName() + " added.");
+        }
     }
 
     /**
@@ -25,7 +30,7 @@ public class Menu {
     public void removeItem(String itemName) {
         items = items.stream()
                 .filter(item -> !item.getName().equalsIgnoreCase(itemName))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     /**

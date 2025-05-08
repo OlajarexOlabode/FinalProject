@@ -14,21 +14,40 @@ public class Admin extends User {
     @Override
     public void viewMenu(Menu menu) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("\nAdmin - Menu:");
-        System.out.println("Sort by: 1. Name  2. Price  3. None");
-        System.out.print("Choose a sort option: ");
-        String choice = scanner.nextLine();
+        System.out.println("\nAdmin - Menu:" );
 
-        switch (choice) {
-            case "1" -> menu.sortByName();
-            case "2" -> menu.sortByPrice();
-            default -> System.out.println("No sorting done.");
+        while (true) {
+            System.out.println("1. Sort by Name  \n2. Sort by Price \n3. Update menu" );
+            System.out.print("Choose an option: " );
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1" -> {
+                    if (menu.getItems().isEmpty()) {
+                        System.out.println("The menu is empty.");
+                    } else {
+                        menu.sortByName();
+                    }
+                }
+                case "2" -> {
+                    if (menu.getItems().isEmpty()) {
+                        System.out.println("The menu is empty.");
+                    } else {
+                        menu.sortByPrice();
+                    }
+                }
+                case "3" -> System.out.println("Here's what's available:" );
+                default -> {
+                    System.out.println("Invalid option. Choose 1,2, or 3." );
+                    continue;
+                }
+            }
+
+            break;
         }
-
-        menu.getItems()
-                .forEach(item -> System.out.printf("- %s: $%.2f", item.getName(), item.getPrice()));
+            menu.getItems()
+                    .forEach(item -> System.out.println(String.format("- %s: $%.2f", item.getName(), item.getPrice())));
     }
-
     /**
      * Adding food item to menu
      * @param menu the menu to be changed
@@ -37,7 +56,6 @@ public class Admin extends User {
     public void addFoodItem(Menu menu, FoodItem item) {
         if (item != null && menu != null) {
             menu.addItem(item);
-            System.out.println(item.getName() + " added.");
         } else {
             System.out.println("No item/menu.");
         }
@@ -49,9 +67,14 @@ public class Admin extends User {
      * @param itemName the item to be removed
      */
     public void removeFoodItem(Menu menu, String itemName) {
-        if (itemName != null && itemName.isBlank()) { //isBlank for empty/whitespaces
-            menu.removeItem(itemName);
-            System.out.println(itemName + " removed.");
+        if (itemName != null) {
+            FoodItem toRemove = menu.findItemByName(itemName);
+            if (toRemove != null) {
+                menu.removeItem(itemName);
+                System.out.println(itemName + " removed.");
+            } else {
+                System.out.println(itemName + " is not in the menu.");
+            }
         } else {
             System.out.println("Invalid item name.");
         }
