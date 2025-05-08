@@ -17,7 +17,7 @@ class OrderTest {
         boolean containsBurger = order.getOrderedItems().containsKey(burger);
         int quantity = order.getOrderedItems().get(burger);
 
-        Assertions.assertEquals(true, containsBurger, "Burger added in order");
+        assertTrue(containsBurger, "Burger added in order" );
         Assertions.assertEquals(1, quantity, "Burger x1");
     }
 

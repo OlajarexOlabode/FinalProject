@@ -4,6 +4,10 @@ import java.util.Map;
 
 public class Receipt {
 
+    /**
+     * Prints out a receipt for every successful order
+     * @param order the order to be printed out in the receipt
+     */
     public static void printReceipt(Order order) {
         System.out.println("\n--- RECEIPT ---");
 
