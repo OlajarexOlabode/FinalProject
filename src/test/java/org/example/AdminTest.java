@@ -47,7 +47,7 @@ class AdminTest {
 
         admin.removeFoodItem(menu, "Burger");
 
-        boolean contains = menu.getItems().stream() // anyMatch 
+        boolean contains = menu.getItems().stream() // anyMatch
                 .anyMatch(item -> item.getName().equalsIgnoreCase("Burger"));
 
         Assertions.assertFalse(contains, "Admin removed burger from menu.");
