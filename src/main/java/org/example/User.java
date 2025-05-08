@@ -1,7 +1,7 @@
 package org.example;
 
 public abstract class User {
-    private String username;
+    protected String username;
 
     public User(String username) {
         this.username = username;

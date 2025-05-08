@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Menu {
@@ -43,12 +40,20 @@ public class Menu {
                 .orElse(null);
     }
 
+    /**
+     * sorts the food items by their names
+     */
     public void sortByName() {
-
+        items.sort((item1, item2) -> item1.getName().compareToIgnoreCase(item2.getName()));
+        System.out.println("Menu sorted by name.");
     }
 
+    /**
+     * sorts the food items by their price
+     */
     public void sortByPrice() {
-
+        items.sort(new PriceComparator());
+        System.out.println("Menu sorted by price.");
     }
 
     public List<FoodItem> getItems() {

@@ -16,7 +16,7 @@ public class Customer extends User implements Orderable {
      */
     @Override
     public void viewMenu(Menu menu) {
-        System.out.println(" Menu:");
+        System.out.println("Customer - Menu:");
         menu.getItems()
                 .forEach(item ->
                         System.out.printf("- %s: $%.2f ", item.getName(), item.getPrice()));
@@ -53,7 +53,10 @@ public class Customer extends User implements Orderable {
 
         double total = order.calculateTotal();
         System.out.printf(" Your order is complete. Total: $%.2f ", total);
+
+        Receipt.printReceipt(order);
     }
+
 
     public Order getOrder() {
         return order;

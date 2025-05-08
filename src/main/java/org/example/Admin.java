@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Scanner;
+
 public class Admin extends User {
     public Admin(String username) {
         super(username);
@@ -11,7 +13,18 @@ public class Admin extends User {
      */
     @Override
     public void viewMenu(Menu menu) {
-        System.out.println("Admin - Menu: ");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\nAdmin - Menu:");
+        System.out.println("Sort by: 1. Name  2. Price  3. None");
+        System.out.print("Choose a sort option: ");
+        String choice = scanner.nextLine();
+
+        switch (choice) {
+            case "1" -> menu.sortByName();
+            case "2" -> menu.sortByPrice();
+            default -> System.out.println("No sorting done.");
+        }
+
         menu.getItems()
                 .forEach(item -> System.out.printf("- %s: $%.2f", item.getName(), item.getPrice()));
     }

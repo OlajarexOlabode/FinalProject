@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public class FoodItem implements Comparable<FoodItem> {
@@ -9,6 +10,11 @@ public class FoodItem implements Comparable<FoodItem> {
     public FoodItem(String name, double price) {
         this.name = name;
         this.price = price;
+    }
+
+    @Override
+    public int compareTo(FoodItem other) {
+        return this.name.compareTo(other.name);
     }
 
     @Override
@@ -46,9 +52,11 @@ public class FoodItem implements Comparable<FoodItem> {
     public void setPrice(double price) {
         this.price = price;
     }
+}
 
+class PriceComparator implements Comparator<FoodItem> {
     @Override
-    public int compareTo(FoodItem o) {
-        return this.name.compareTo(o.name);
+    public int compare(FoodItem o1, FoodItem o2) {
+        return Double.compare(o1.getPrice(), o2.getPrice());
     }
 }
