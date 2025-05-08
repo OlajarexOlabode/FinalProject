@@ -46,5 +46,4 @@ class OrderTest {
         double total = order.calculateTotal();
         Assertions.assertEquals(6.00, total, 0.01, "Accurate total");
     }
-
 }
