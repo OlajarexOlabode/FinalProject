@@ -18,7 +18,7 @@ public class Driver extends User { // inherits username from the User class
     public void acceptOrder(Order order) {
         if (order != null) {
             deliveryOrders.add(order);
-            System.out.println(username + "has accepted the order!");
+            System.out.println(username + " has accepted the order!");
         }
     }
 

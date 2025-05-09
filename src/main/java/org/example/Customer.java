@@ -38,29 +38,59 @@ public class Customer extends User implements Orderable {
 
         System.out.println();
         while (ordering) {
-            System.out.print("What do you wish to order? Enter 'done' to finish: ");
-            String input = scanner.nextLine();
+            System.out.print("Do you wish to add or remove an item? (add/remove/done): ");
+            String action = scanner.nextLine().toLowerCase();
 
-            if (input.equalsIgnoreCase("done")) {
-                ordering = false;
-            } else {
-                FoodItem choice = menu.findItemByName(input);
-                if (choice != null) {
-                    order.addItem(choice);
-                    System.out.println(choice.getName() + " is added to your order.");
-                } else {
-                    System.out.println("Item not found. Please try again.");
+            switch (action) {
+                case "add" -> {
+                    System.out.print("Enter item name to add: ");
+                    String itemName = scanner.nextLine();
+                    FoodItem item = menu.findItemByName(itemName);
+
+                    if (item != null) {
+                        System.out.print("How many would you like? ");
+                        try {
+                            int qty = Integer.parseInt(scanner.nextLine().trim());
+                            if (qty > 0) {
+                                for (int i = 0; i < qty; i++) {
+                                    order.addItem(item);
+                                }
+                                System.out.println(qty + "x " + item.getName() + " added to your order.");
+                            } else {
+                                System.out.println("Quantity must be at least 1.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid number.");
+                        }
+                    } else {
+                        System.out.println("Item is not in the menu.");
+                    }
                 }
+
+                case "remove" -> {
+                    System.out.print("Enter item to remove: ");
+                    String itemName = scanner.nextLine().trim();
+                    FoodItem item = menu.findItemByName(itemName);
+
+                    if (item != null && order.getOrderedItems().containsKey(item)) {
+                        order.removeItem(item);
+                        System.out.println(item.getName() + " removed from your order.");
+                    } else {
+                        System.out.println("Item is not in your order.");
+                    }
+                }
+
+                case "done" -> ordering = false;
+
+                default -> System.out.println("Invalid option. Enter add, remove, or done.");
             }
         }
 
         double total = order.calculateTotal();
         System.out.println("\nOrder complete!");
-        System.out.println("Your order number is: #" + order.getOrderId());
         System.out.printf("Total: $%.2f ", total);
         System.out.println("\nThanks for ordering! Come again soon.");
 
-        order.assignOrderId();
         Receipt.printReceipt(order);
     }
 
