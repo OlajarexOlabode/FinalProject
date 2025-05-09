@@ -87,4 +87,46 @@ class OrderTest {
 
         Assertions.assertEquals(0.00, total, 0.01, "Total is $0.00. Order is empty.");
     }
+
+    /**
+     * removing item with quantity > 1
+     */
+    @Test
+    public void testRemoveItem1() {
+        Order order = new Order();
+        FoodItem burger = new FoodItem("Burger", 4.00);
+        order.addItem(burger);
+        order.addItem(burger);
+
+        order.removeItem(burger);
+
+        Assertions.assertEquals(1, order.getOrderedItems().get(burger), "Burger quantity is now 1");
+    }
+
+    /**
+     * removing item with quantity = 1
+     */
+    @Test
+    public void testRemoveItem2() {
+        Order order = new Order();
+        FoodItem fries = new FoodItem("Fries", 2.00);
+        order.addItem(fries);
+
+        order.removeItem(fries);
+
+        Assertions.assertFalse(order.getOrderedItems().containsKey(fries), "Fries is removed from the order");
+    }
+
+    /**
+     * removing item that was never added
+     */
+    @Test
+    public void testRemoveItem3() {
+        Order order = new Order();
+        FoodItem burger = new FoodItem("Burger", 4.00);
+
+        order.removeItem(burger);
+
+        Assertions.assertEquals(0, order.getOrderedItems().size(), "Order is empty");
+    }
 }

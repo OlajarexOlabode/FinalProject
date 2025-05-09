@@ -54,7 +54,26 @@ class MenuTest {
                 .filter(item -> item.getName().equalsIgnoreCase("Burger"))
                 .count();
 
-        assertEquals(2, burgerCount, "Burger is added twice." );
+        assertEquals(1, burgerCount, "Burger can only be added once." );
+    }
+
+    /**
+     * adding new object of the same item
+     */
+    @Test
+    public void testAddItem4() {
+        Menu menu = new Menu();
+        FoodItem burger1 = new FoodItem("Burger", 4.00);
+        FoodItem burger2 = new FoodItem("Burger", 5.00);
+
+        menu.addItem(burger1);
+        menu.addItem(burger2);
+
+        long burgerCount = menu.getItems().stream()
+                .filter(item -> item.getName().equalsIgnoreCase("Burger"))
+                .count();
+
+        assertEquals(1, burgerCount, "Only one burger can be in menu." );
     }
 
     /**

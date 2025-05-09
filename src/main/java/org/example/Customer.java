@@ -28,6 +28,7 @@ public class Customer extends User implements Orderable {
      */
     @Override
     public void placeOrder(Menu menu) {
+        // if menu is empty, cancel order
         if (menu.getItems().isEmpty()) {
             System.out.println("\nThe menu is empty. Try again later.");
             return;
@@ -36,7 +37,9 @@ public class Customer extends User implements Orderable {
         Scanner scanner = new Scanner(System.in);
         boolean ordering = true;
 
-        System.out.println();
+        System.out.println(); // skip a line
+
+        // runs as long as customer is not done ordering
         while (ordering) {
             System.out.print("Do you wish to add or remove an item? (add/remove/done): ");
             String action = scanner.nextLine().toLowerCase();
@@ -45,13 +48,15 @@ public class Customer extends User implements Orderable {
                 case "add" -> {
                     System.out.print("Enter item name to add: ");
                     String itemName = scanner.nextLine();
+                    // finding item name in menu
                     FoodItem item = menu.findItemByName(itemName);
 
                     if (item != null) {
                         System.out.print("How many would you like? ");
                         try {
-                            int qty = Integer.parseInt(scanner.nextLine().trim());
+                            int qty = Integer.parseInt(scanner.nextLine());
                             if (qty > 0) {
+                                // adding the item to the order with the accurate quantity
                                 for (int i = 0; i < qty; i++) {
                                     order.addItem(item);
                                 }
@@ -70,6 +75,7 @@ public class Customer extends User implements Orderable {
                 case "remove" -> {
                     System.out.print("Enter item to remove: ");
                     String itemName = scanner.nextLine().trim();
+                    // finding item name in order before removing it
                     FoodItem item = menu.findItemByName(itemName);
 
                     if (item != null && order.getOrderedItems().containsKey(item)) {
@@ -80,17 +86,19 @@ public class Customer extends User implements Orderable {
                     }
                 }
 
-                case "done" -> ordering = false;
+                case "done" -> ordering = false; // exiting the loop. customer is done
 
                 default -> System.out.println("Invalid option. Enter add, remove, or done.");
             }
         }
 
+        //calculating and printing the total
         double total = order.calculateTotal();
         System.out.println("\nOrder complete!");
         System.out.printf("Total: $%.2f ", total);
         System.out.println("\nThanks for ordering! Come again soon.");
 
+        // printing receipt
         Receipt.printReceipt(order);
     }
 

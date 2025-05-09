@@ -28,15 +28,32 @@ class DriverTest {
     }
 
     /**
-     * driver accepting a null order
+     * driver accepting multiple orders
      */
     @Test
     public void testAcceptOrder2() {
+        Driver driver = new Driver("Olajare");
+        Order order1 = new Order();
+        Order order2 = new Order();
+
+        driver.acceptOrder(order1);
+        driver.acceptOrder(order2);
+
+        List<Order> toDeliver = driver.getDeliveryOrders();
+        assertEquals(2, toDeliver.size(), "Driver has 2 orders.");
+        assertTrue(toDeliver.contains(order1));
+        assertTrue(toDeliver.contains(order2));
+    }
+
+    /**
+     * driver accepting a null order
+     */
+    @Test
+    public void testAcceptOrder3() {
         Driver driver = new Driver("Olabode");
 
         driver.acceptOrder(null);
 
         Assertions.assertEquals(0, driver.getDeliveryOrders().size(), "No order to accept.");
     }
-
 }

@@ -66,6 +66,21 @@ class AdminTest {
         admin.removeFoodItem(menu, "Wrap");
 
         Assertions.assertEquals(1, menu.getItems().size(), "Menu size is the same.");
-        Assertions.assertTrue(menu.getItems().contains(burger), "Burger is in menu.");
+        Assertions.assertTrue(menu.getItems().contains(burger), "Burger is still in menu.");
+    }
+
+    /**
+     * removing null item from menu
+     */
+    @Test
+    public void testRemoveFoodItem3() {
+        Admin admin = new Admin("Admin");
+        Menu menu = new Menu();
+        FoodItem burger = new FoodItem("Burger", 4.00);
+        menu.addItem(burger);
+
+        admin.removeFoodItem(menu, null);
+
+        assertTrue(menu.getItems().contains(burger), "Burger is still in menu.");
     }
 }

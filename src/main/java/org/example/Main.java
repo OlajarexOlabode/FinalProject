@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+  // MAIN TESTING TO RUN THE FOOD SYSTEM
+
         Scanner scanner = new Scanner(System.in);
         Menu menu = new Menu();
 //        menu.getItems().addAll(FileManager.loadMenu());

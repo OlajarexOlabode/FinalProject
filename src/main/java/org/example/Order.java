@@ -16,7 +16,7 @@ public class Order {
     public void addItem(FoodItem item) {
         orderedItemCounts.put(item, orderedItemCounts.getOrDefault(item, 0) + 1);
         // if item is already in map, it gets the current count, if not it returns 0 by default
-        // + 1 adding one more of the item
+        // +1. adding one more of the item
     }
 
     /**
@@ -26,7 +26,7 @@ public class Order {
     public void removeItem(FoodItem item) {
         if (orderedItemCounts.containsKey(item)) {
             int count = orderedItemCounts.get(item);
-            if (count < 1) {
+            if (count > 1) {
                 orderedItemCounts.put(item, count - 1);
             } else {
                 orderedItemCounts.remove(item);
